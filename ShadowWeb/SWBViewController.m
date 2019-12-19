@@ -139,6 +139,7 @@
 }
 
 - (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
     [self relayout:self.view.bounds];
 }
 
@@ -152,6 +153,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     if ([ShadowsocksRunner settingsAreNotComplete]) {
         [self showSettings];
     }
@@ -310,7 +312,8 @@
             [self showSettings];
             break;
         case 5:
-            [self presentModalViewController:qrCodeViewController animated:YES];
+            [self presentViewController:qrCodeViewController animated:YES completion:NULL];
+//            [self presentModalViewController:qrCodeViewController animated:YES];
             break;
         case 6:
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/shadowsocks/shadowsocks-iOS/wiki/Help"]];
@@ -453,7 +456,8 @@
 //    NSInteger currentTabTag = 0;
     NSUInteger count = [pages count];
     for (int i = 0; i < count; i++) {
-        if ([[[pages objectAtIndex:i] selected] boolValue]) {
+        SWBPage * page = [pages objectAtIndex:i];
+        if ([page.selected boolValue]) {
             currentTabTag = i;
         }
     }

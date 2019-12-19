@@ -114,6 +114,7 @@
 
 + (void)saveConfigForKey:(NSString *)key value:(NSString *)value {
     [[NSUserDefaults standardUserDefaults] setObject:value forKey:key];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (NSString *)configForKey:(NSString *)key {
@@ -122,7 +123,7 @@
 
 + (void)setUsingPublicServer:(BOOL)use {
     [[NSUserDefaults standardUserDefaults] setBool:use forKey:kShadowsocksUsePublicServer];
-
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (BOOL)isUsingPublicServer {

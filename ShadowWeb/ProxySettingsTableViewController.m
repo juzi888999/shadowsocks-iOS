@@ -73,7 +73,7 @@
 #pragma mark - navigation
 
 - (void)cancel {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:NULL];
     if (self->_myPopoverController) {
         [_myPopoverController dismissPopoverAnimated:YES];
     }
@@ -95,7 +95,9 @@
 
     [ShadowsocksRunner reloadConfig];
 
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:^{
+
+    }];
     if (self->_myPopoverController) {
         [_myPopoverController dismissPopoverAnimated:YES];
     }
@@ -191,7 +193,7 @@
             case kPasswordRow:
                 cell.textLabel.text = _L(Password);
                 textField.keyboardType = UIKeyboardTypeDefault;
-                textField.secureTextEntry = YES;
+                textField.secureTextEntry = NO;
                 textField.text = [[NSUserDefaults standardUserDefaults] stringForKey:kShadowsocksPasswordKey];
                 passwordField = textField;
                 break;
